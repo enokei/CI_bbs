@@ -1,5 +1,5 @@
 <h1>編集画面</h1>
-<br/><a href="">一覧に戻る</a>
+<br/><a href="/cisample/bbs">一覧に戻る</a>
 <br/><br/>
 
 <form action="" method="post">
@@ -7,7 +7,7 @@
     <input type="text" name="name" size="40" value=""/><br/>
 
     <label for="content"><b>コメント</b></label><br/>
-    <input type="textarea" name="content" size="40" rows="5" value=""/><br/>
+    <input type="text" name="content" size="40"  value=""/><br/>
 
     <input type="hidden" name="date" />
 

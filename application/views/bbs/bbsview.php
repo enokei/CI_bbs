@@ -1,7 +1,7 @@
 <h1>MVC掲示板</h1>
 <br/>
 
-<a href="">投稿する</a><br/><br/>
+<a href="/cisample/bbs/add">投稿する</a><br/><br/>
 <table>
     <tr>
     <th>投稿者</th>
@@ -14,9 +14,9 @@
         $arr = $query[$i];
        
         echo "<tr>";
-        echo "<td><a href=''>{$arr->name}</a></td>";
-        echo "<td><a href=''>{$arr->content}</a></td>";
-        echo "<td><a href=''>{$arr->date}</a></td>";
+        echo "<td><a href='/cisample/bbs/show/{$arr->id}'>{$arr->name}</a></td>";
+        echo "<td><a href='/cisample/bbs/show/{$arr->id}'>{$arr->content}</a></td>";
+        echo "<td><a href='/cisample/bbs/show/{$arr->id}'>{$arr->date}</a></td>";
         echo "</tr>";
        
     }

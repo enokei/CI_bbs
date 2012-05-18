@@ -3,8 +3,6 @@ class Bbs extends CI_Controller{
     
     public function index() {
 
-        $this->load->model('Board');
-        
         $board = array(
             "query" => Board::find("all",array('order'=>'id desc'))
         );
@@ -13,30 +11,36 @@ class Bbs extends CI_Controller{
 
     public function add()
     {
+        $this->load->helper("url");
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $board = new Board(array(
+                'name' => $_POST["name"],
+                'content' => $_POST["content"],
+            ));
+            $board->save();
 
-        $this->load->model('Board');
-        $this->load->view('bbs/add');
+            redirect("/bbs/show/". $board->id);
+
+        }else{
+            $this->load->view('bbs/add');
+        }
         
-        $this->load->helper('url');
-
-    $board = new Board(array('name'=>'','content' => ''));
-    $board->save();
-    $board->errors->is_invalid('name','content'); 
-    $board->errors->on('name','content'); 
     }
     
-    public function show()
+    public function show($id)
     {
-        $this->load->model('Board');
-        Board::find();
-        $this->load->view('bbs/show');
+        $board = array(
+             "query" => Board::find($id)
+    );       
+        $this->load->view('bbs/show',$board);
     }
     
     public function edit()
     {
-        $this->load->model('Board');
-        Board::find();
-        $this->load->view('bbs/edit');    
+        $board = array(
+            "query" => Board::find()
+    );
+        $this->load->view('bbs/show',$board); 
     }
 }
 
