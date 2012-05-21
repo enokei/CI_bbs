@@ -1,8 +1,8 @@
 <?php
 class Bbs extends CI_Controller{
     
-    public function index() {
-
+    public function index() 
+    {
         $boards = array(
             "query" => Board::find("all",array('order'=>'id desc'))
         );
@@ -11,19 +11,24 @@ class Bbs extends CI_Controller{
 
     public function add()
     {
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
+        $this->load->helper('date');
+        $this->load->view('bbs/add');
+        
+        if(!empty($_POST))
+        {
             $boards = new Board(array(
                 'name' => $_POST["name"],
                 'content' => $_POST["content"],
+                'date' =>$_POST["date"]
             ));
+          if($boards->is_valid())
+          {
             $boards->save();
-
-            redirect("/bbs/bbsview". $boards->id);
-
-        }else{
-            $this->load->view('bbs/add');
-        }
-        
+            redirect("/bbs/show",$boards->id);
+          }else{
+            $this->load->view('bbs/bbsview');
+          }
+        }  
     }
     
     public function show($id)
@@ -35,23 +40,22 @@ class Bbs extends CI_Controller{
     }
     
     public function edit($id)
-    {
-        $board = array(
-            "query" => Board::find($id)
-        );
-        $this->load->view('bbs/edit',$board);
-
-        if($_SERVER['REQUEST_METHOD'] == "POST"){
-            $board = new Board(array(
-                'name' => $_POST["name"],
-                'content' => $_POST["content"],
-            ));
-            $board->save();
-
-            redirect("/bbs/bbsview". $board->id);
-
+    {  
+        
+        if($_SERVER['REQUEST_METHOD'] == "POST")
+        {
+          $board = Board::find($id);
+          $board->update_attributes(array(
+              'name' => $_POST["name"],
+              'content' => $_POST["content"],
+              'date' =>$_POST["date"]
+          ));
+        redirect("bbs/show/{$board->id}");
         }else{
-            $this->load->view('bbs/bbsview');
+            $this->load->view('bbs/edit',
+            array(
+                "query" => Board::find($id)
+            )); 
         }
     }
 }

@@ -1,6 +1,6 @@
 <h1>投稿確認</h1>
-<br/><a href="/cisample/bbs">一覧に戻る</a>
-<br/><br/>
+<br><a href="/cisample/bbs">一覧に戻る</a>
+<br><br>
 
 <table>
 
@@ -12,8 +12,11 @@
 
     ?>
 </table>
-<br/>
-　　　<a href="/cisample/bbs/edit">この投稿を編集する</a>
-<br/>
+<br>
+    <?php
+    echo "<a href='/cisample/bbs/edit/{$query->id}'>この投稿を編集する</a>";
+    ?>
+
+<br>
     
     
