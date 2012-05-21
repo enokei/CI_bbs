@@ -2,10 +2,19 @@
 
 class Welcome extends CI_Controller {
 
-    
-    public function index()
-	{  
-		$this->load->view('welcome_message');
-	}
+
+    function __construct()
+    {
+        parent::__construct();
+
+        $this->load->helper('url');
+        $this->load->library('twig');
+    }
+
+    function index()
+    {
+        $data = array("name" => "keisuke");
+        $this->twig->display('welcome.html', $data);
+    }
 }
 

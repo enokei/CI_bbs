@@ -1,5 +1,0 @@
-
-RewriteEngine on
-RewriteBase /cisample
-RewriteCond $1 !^(index\.php|images|robots\.txt)
-RewriteRule ^(.*)$ /cisample/index.php/$1 [L]

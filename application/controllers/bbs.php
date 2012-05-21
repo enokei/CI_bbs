@@ -19,12 +19,12 @@ class Bbs extends CI_Controller{
             $boards = new Board(array(
                 'name' => $_POST["name"],
                 'content' => $_POST["content"],
-                'date' =>$_POST["date"]
+                'date' => time()
             ));
           if($boards->is_valid())
           {
             $boards->save();
-            redirect("/bbs/show",$boards->id);
+            redirect("/bbs/show/{$boards->id}");
           }else{
             $this->load->view('bbs/bbsview');
           }
@@ -48,7 +48,7 @@ class Bbs extends CI_Controller{
           $board->update_attributes(array(
               'name' => $_POST["name"],
               'content' => $_POST["content"],
-              'date' =>$_POST["date"]
+              'date' =>time()
           ));
         redirect("bbs/show/{$board->id}");
         }else{
