@@ -2,12 +2,12 @@
 <br/><a href="/cisample/bbs">一覧に戻る</a>
 <br/><br/>
 
-<form action="" method="post">
+<form action="/cisample/bbs/edit" method="post">
     <label for="name"><b>投稿者</b></label><br/>
-    <input type="text" name="name" size="40" value=""/><br/>
+    <input type="text" name="name" size="40" value="{$query->name}"/><br/>
 
     <label for="content"><b>コメント</b></label><br/>
-    <input type="text" name="content" size="40"  value=""/><br/>
+    <input type="text" name="content" size="40"  value="{$query->content}"/><br/>
 
     <input type="hidden" name="date" />
 

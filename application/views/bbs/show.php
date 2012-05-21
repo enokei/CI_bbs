@@ -7,8 +7,8 @@
     <?php
 
     echo "<tr><th>投稿者</th><td>{$query->name}</td></tr>";
-    echo "<tr><th>コメント</th><td> </td></tr>";
-    echo "<tr><th>日時</th><td> </td></tr>";
+    echo "<tr><th>コメント</th><td>{$query->content}</td></tr>";
+    echo "<tr><th>日時</th><td>{$query->date}</td></tr>";
 
     ?>
 </table>

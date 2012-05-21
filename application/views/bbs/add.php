@@ -9,5 +9,7 @@
     <label for="content"><b>コメント</b></label><br/>
     <input type="text" name="content" size="40"  placeholder="記入してください。"/><br/>
 
+    <input type="hidden" name="date" />
+
     <input type="submit" value="投稿する">
 </form>

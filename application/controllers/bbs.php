@@ -3,23 +3,22 @@ class Bbs extends CI_Controller{
     
     public function index() {
 
-        $board = array(
+        $boards = array(
             "query" => Board::find("all",array('order'=>'id desc'))
         );
-        $this->load->view('bbs/bbsview',$board);
+        $this->load->view('bbs/bbsview',$boards);
     }
 
     public function add()
     {
-        $this->load->helper("url");
         if($_SERVER['REQUEST_METHOD'] == "POST"){
-            $board = new Board(array(
+            $boards = new Board(array(
                 'name' => $_POST["name"],
                 'content' => $_POST["content"],
             ));
-            $board->save();
+            $boards->save();
 
-            redirect("/bbs/show/". $board->id);
+            redirect("/bbs/bbsview". $boards->id);
 
         }else{
             $this->load->view('bbs/add');
@@ -29,18 +28,31 @@ class Bbs extends CI_Controller{
     
     public function show($id)
     {
-        $board = array(
+        $boards = array(
              "query" => Board::find($id)
     );       
-        $this->load->view('bbs/show',$board);
+        $this->load->view('bbs/show',$boards);
     }
     
-    public function edit()
+    public function edit($id)
     {
         $board = array(
-            "query" => Board::find()
-    );
-        $this->load->view('bbs/show',$board); 
+            "query" => Board::find($id)
+        );
+        $this->load->view('bbs/edit',$board);
+
+        if($_SERVER['REQUEST_METHOD'] == "POST"){
+            $board = new Board(array(
+                'name' => $_POST["name"],
+                'content' => $_POST["content"],
+            ));
+            $board->save();
+
+            redirect("/bbs/bbsview". $board->id);
+
+        }else{
+            $this->load->view('bbs/bbsview');
+        }
     }
 }
 
